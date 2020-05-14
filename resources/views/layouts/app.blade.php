@@ -47,7 +47,7 @@
                             </li>
 
                         @else
-                            @if (Auth::user()->rol == 1)
+                            @if (Auth::user()->rol == 'Jefe')
                             @if (Route::has('register'))
                                 <li class="nav-item">
                                     <a class="nav-link" href="{{ route('register') }}">REGISTRO</a>
