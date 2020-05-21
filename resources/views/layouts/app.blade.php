@@ -47,6 +47,9 @@
                             </li>
 
                         @else
+                             <li class="nav-item">
+                                    <a class="nav-link" href="{{ route('home') }}">Inicio</a>
+                                </li>
                             @if (Auth::user()->rol == 'Jefe')
                             @if (Route::has('register'))
                                 <li class="nav-item">
