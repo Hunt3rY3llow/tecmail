@@ -54,6 +54,9 @@
                                 </li>
                             @endif
                                     <a class="nav-link" href="{{ url('/modificar') }}">Modificar usuario</a>
+                            <li class="nav-item">
+                                <a class="nav-link" href="{{route('NuevoMensaje')}}">Enviar un mensaje</a>
+                            </li>
                             
                             <li class="nav-item dropdown">
                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
@@ -73,6 +76,7 @@
                                     </form>
                                 </div>
                             </li>
+                            
                             
                             @else
                             <li class="nav-item dropdown">

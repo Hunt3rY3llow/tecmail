@@ -21,4 +21,5 @@ Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
 
- Route::resource('modificar', 'ModifcarusuariosController');
+Route::resource('modificar', 'ModifcarusuariosController');
+Route::view('/NuevoMensaje','newMessage')->name('NuevoMensaje');
