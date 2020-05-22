@@ -29,9 +29,9 @@
   <div class="col-md-4 col-form-label text-md-right">
     <label for="prioridad">Seleccione la prioridad del mesaje</label>
     <select name="prioridad" id="prioridad">
-      <option value="1">Informativo</option>
-      <option value="2">Normal</option>
-      <option value="3">Urgente</option>
+      <option>Informativo</option>
+      <option >Normal</option>
+      <option >Urgente</option>
     </select>
   </div>
   <div class="form-group row">

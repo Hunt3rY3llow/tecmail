@@ -15,10 +15,10 @@ class CreateMensajesTable extends Migration
     {
         Schema::create('mensajes', function (Blueprint $table) {
             $table->id();
-            $table->string('asunto');
-            $table->string('mensaje');
-            $table->binary('adjunto');
-            $table->smallinteger('prioridad');
+            $table->string('asunto')->nullable();
+            $table->string('mensaje')->nullable();
+            $table->binary('adjunto')->nullable();
+            $table->string('prioridad');
             $table->boolean('leido');
             $table->string('co');
             $table->string('cd');
