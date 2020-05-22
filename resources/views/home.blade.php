@@ -5,7 +5,7 @@
     <div class="row justify-content-center">
         <div class="col-md-8">
             <div class="card">
-                <div class="card-header">Dashboard</div>
+                <div class="card-header">Bandeja de Mensajes</div>
                 
                 <div class="card-body">
                     @if (session('status'))
@@ -13,12 +13,27 @@
                             {{ session('status') }}
                         </div><br>
                     @endif
+                    <div>
+                        <table class="table table-dark">
+                        <tr>
+                            <th>Remitente</th>
+                            <th>Asunto</th>
+                            <th>Prioridad</th>
+                        </tr>
+                         @forelse($mensajes as $mensajesItem)
+                        <tr>
+                            <td>{{$mensajesItem->co}}</td>
+                            <td>{{$mensajesItem->asunto}}</td>
+                            <td>{{$mensajesItem->prioridad}}</td>
+                        @empty
+                            <h1>Nada para mostrar</h1>
+                        </tr>
+                        @endforelse    
+                    </div>
+                    </table>
                         
-                    You are logged in!
                 </div>
-                <a href="{{ url('/mensaje') }}" class="btn btn-info btn-xs">
-                        <span >Nuevo mensaje</span>
-                     </a>
+               
             </div>
         </div>
     </div>

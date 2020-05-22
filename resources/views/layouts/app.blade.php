@@ -58,7 +58,7 @@
                             @endif
                                     <a class="nav-link" href="{{ url('/modificar') }}">Modificar usuario</a>
                             <li class="nav-item">
-                                <a class="nav-link" href="{{route('NuevoMensaje')}}">Enviar un mensaje</a>
+                                <a class="nav-link" href="{{route('NuevoMensaje.index')}}">Enviar un mensaje</a>
                             </li>
                             
                             <li class="nav-item dropdown">

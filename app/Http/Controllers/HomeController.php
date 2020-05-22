@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\mensaje;
+use DB;
 
 class HomeController extends Controller
 {
@@ -23,6 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $mensajes =  mensaje::where('cd', auth()->user()->email)->orderBy('prioridad','DESC')->get();
+        return view('home')->with('mensajes', $mensajes);
     }
 }
