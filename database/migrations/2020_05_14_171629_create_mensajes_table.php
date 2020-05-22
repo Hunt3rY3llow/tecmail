@@ -17,12 +17,12 @@ class CreateMensajesTable extends Migration
             $table->id();
             $table->string('asunto');
             $table->string('mensaje');
-            $table->binary('adjunto');
+            $table->binary('adjunto')->nullable();
             $table->smallinteger('prioridad');
             $table->boolean('leido');
             $table->string('co');
             $table->string('cd');
-            $table->timestamp('enviado',0);
+            $table->timestamp('enviado',0)->nullable();
         });
     }
 

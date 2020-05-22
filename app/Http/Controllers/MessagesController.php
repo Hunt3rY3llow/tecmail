@@ -56,7 +56,9 @@ class MessagesController extends Controller
      */
     public function show($id)
     {
-        //
+        $mensaje = mensaje::find($id);
+        //return $mensaje;
+        return view('VerMensaje')->with('mensaje', $mensaje);
     }
 
     /**

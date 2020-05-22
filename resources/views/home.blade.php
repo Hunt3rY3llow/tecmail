@@ -18,12 +18,14 @@
                         <tr>
                             <th>Remitente</th>
                             <th>Asunto</th>
+                            <th>Mensaje</th>
                             <th>Prioridad</th>
                         </tr>
                          @forelse($mensajes as $mensajesItem)
                         <tr>
-                            <td>{{$mensajesItem->co}}</td>
+                            <td><a href="{{route('NuevoMensaje.show',$mensajesItem)}}">{{$mensajesItem->co}}</a></td>
                             <td>{{$mensajesItem->asunto}}</td>
+                            <td>{{$mensajesItem->mensaje}}</td>
                             <td>{{$mensajesItem->prioridad}}</td>
                         @empty
                             <h1>Nada para mostrar</h1>
