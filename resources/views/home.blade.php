@@ -34,9 +34,9 @@
     <div class="mensajes">
         <!--Contenedor para la numeración de pagina-->
         <div class="paginacion">
-            <div class="pagina_numero">Página 1 de 0</div>
-            <a id="b_pagina_atras"><i class="fas fa-angle-left"></i></a>
-            <a id="b_pagina_adelante"><i class="fas fa-angle-right"></i></a>
+            <div class="pagina_numero">
+                {{ $mensajes->links() }}
+            </div>
         </div>
 
     <ul>

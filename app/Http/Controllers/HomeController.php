@@ -25,7 +25,7 @@ class HomeController extends Controller
      */
     public function index()
     {
-        $mensajes =  mensaje::where('cd', auth()->user()->email)->orderBy('prioridad','DESC')->get();
+        $mensajes =  mensaje::where('cd', auth()->user()->email)->orderBy('prioridad','DESC')->paginate(1);
         return view('home')->with('mensajes', $mensajes);
     }
 

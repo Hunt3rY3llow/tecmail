@@ -19,19 +19,23 @@
                  <div class="nm_head">
                      <input hidden id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="emailO" value="{{auth()->user()->email}}" autofocus readonly="readonly">
 
-                     <input name="email" class="datos_head" value="{{$mensaje ?? '' ? $mensaje['co'] : '' }}" type="text" placeholder="Para">
+                     <input name="email" class="datos_head" value="{{$mensaje ?? '' ? $mensaje['co'] : '' }}" type="text" placeholder="Para" 
+                     pattern="([a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5})+([,][a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*@[a-zA-Z0-9_]+([.][a-zA-Z0-9_]+)*[.][a-zA-Z]{1,5})*">
 
                      <input id="mensaje"  name="asunto" type="text" value="{{$mensaje ?? '' ? 'RESPUESTA: '.$mensaje['asunto'] : '' }}" placeholder="Asunto" class="datos_head">
                  </div>
                   
                  <!--Area para seleccionar la prioiridad-->
                  <select name="prioridad" id="prioridad" class="datos_head">
-                     <option {{ $mensaje ['prioridad']?? '' == 'Importante' ? 'selected' : ''}}>Importante
+                     <option {{ $mensaje ['prioridad']?? '' == 'Importante' ? 'selected' : ''}}>
+                        Importante
                      </option>
                      <option {{ $mensaje ['prioridad']?? '' == 'Informativo' ? 'selected' : ''}}> 
                         Informativo
                      </option>
-                     <option {{ $mensaje ['prioridad']?? '' == 'Solicitud' ? 'selected' : ''}}>Solicitud</option>
+                     <option {{ $mensaje ['prioridad']?? '' == 'Solicitud' ? 'selected' : ''}}>
+                        Solicitud
+                     </option>
                  </select>
 
                  <!--Area de escritura-->

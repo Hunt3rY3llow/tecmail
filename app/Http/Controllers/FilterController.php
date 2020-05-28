@@ -45,7 +45,7 @@ class FilterController extends Controller
      */
     public function show($id)
     {
-        $mensajes =  mensaje::where([['cd', auth()->user()->email], ['prioridad', $id]])->orderBy('enviado','DESC')->get();
+        $mensajes =  mensaje::where([['cd', auth()->user()->email], ['prioridad', $id]])->orderBy('enviado','DESC')->paginate(1);
         return view('home')->with('mensajes', $mensajes);
     }
 

@@ -41,18 +41,20 @@ class MessagesController extends Controller
         }else{
             $adj =null;
         }
-        
-        mensaje::create([
-            'asunto' => request('asunto'),
-            'mensaje' => request('mensaje'),
-            'adjunto' => $adj,
-            'prioridad' => request('prioridad'),
-            'leido'=> 0,
-            'co' => request('emailO'),
-            'cd' => request('email'),
-            'enviado' => date('Y-m-d
-             H:i:s')
-        ]);
+        $ml = preg_split("[,]", $request->email);
+        foreach ($ml as $emailItem) {
+                mensaje::create([
+                    'asunto' => request('asunto'),
+                    'mensaje' => request('mensaje'),
+                    'adjunto' => $adj,
+                    'prioridad' => request('prioridad'),
+                    'leido'=> 0,
+                    'co' => request('emailO'),
+                    'cd' => $emailItem,
+                    'enviado' => date('Y-m-d H:i:s')
+                ]);
+        }
+
         return redirect()->route('home');   
     }
 
