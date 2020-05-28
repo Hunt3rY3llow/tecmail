@@ -11,6 +11,7 @@
 
     <!-- Scripts -->
     <script src="{{ asset('js/app.js') }}" defer></script>
+    <script src="https://kit.fontawesome.com/2c36e9b7b1.js"></script>
 
     <!-- Fonts -->
     <link rel="dns-prefetch" href="//fonts.gstatic.com">
@@ -18,100 +19,89 @@
 
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link rel="stylesheet" href="{{ asset('css/style_index.css') }}">
 </head>
+
 <body>
-    <div id="app">
-        <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container">
-                @guest
-                 <a class="navbar-brand" href="{{ url('/') }}">
-                   Tecmail
-                 </a>
-                @endguest
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
 
-                <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                    <!-- Left Side Of Navbar -->
-                    <ul class="navbar-nav mr-auto">
+<div class="contenedor_pagina">
+     <!--Contenedor del menú lateral-->
+     <div class="contenedor_menu">
 
-                    </ul>
+@guest
 
-                    <!-- Right Side Of Navbar -->
-                    <ul class="navbar-nav ml-auto">
-                        <!-- Authentication Links -->
-                        @guest
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
-                            </li>
+         <!--Menu lateral cuando estas en login como guest-->
+         <div class="menu_perfil">
+             <a class="navbar-brand" href="{{ url('/') }}">
+             <div class="menu_perfil_foto" id="m_p_l"><img width="100px" id="m_p_f" src="img/avatar.png" alt=""> </div>
+             </a>
+         </div> 
 
-                        @else
-                             <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('home') }}">Inicio</a>
-                                </li>
-                            @if (Auth::user()->rol == 'Jefe')
-                            @if (Route::has('register'))
-                                <li class="nav-item">
-                                    <a class="nav-link" href="{{ route('register') }}">Registro</a>
-                                </li>
-                            @endif
-                                    <a class="nav-link" href="{{ url('/modificar') }}">Modificar usuario</a>
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{route('NuevoMensaje.index')}}">Enviar un mensaje</a>
-                            </li>
-                            
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
-                                
+@endguest
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+@guest
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                            
-                            
-                            @else
-                            <li class="nav-item">
-                                <a class="nav-link" href="{{route('NuevoMensaje.index')}}">Enviar un mensaje</a>
-                            </li>
-                            <li class="nav-item dropdown">
-                                <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
-                                    {{ Auth::user()->name }} <span class="caret"></span>
-                                </a>
+@else
+         <!--Contenedor de el nombre de usuario e imagen-->
+         <div class="menu_perfil">
+             <div class="menu_perfil_foto" id="m_p_l"><img width="50px" id="m_p_f" src="img/avatar.png" alt=""> </div>
+             <div class="menu_perfil_nombre" id="m_p_l"><h3 id="menu_lista" >{{ Auth::user()->name }} </h3></div>
+         </div>
 
-                                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdown">
-                                    <a class="dropdown-item" href="{{ route('logout') }}"
-                                       onclick="event.preventDefault();
-                                                     document.getElementById('logout-form').submit();">
-                                        {{ __('Logout') }}
-                                    </a>
+@if (Auth::user()->rol == 'Jefe')
 
-                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
-                                        @csrf
-                                    </form>
-                                </div>
-                            </li>
-                            @endif
-                        @endguest
-                    </ul>
-                </div>
-            </div>
-        </nav>
+         <!--Menu como administrador-->
+         <div class="menu">
+             <a href="{{ route('home') }}"><div class="menu_lista"><i id="i_m"class="fas fa-home"></i><h3 id="menu_lista" > Inicio </h3></div></a>
 
-        <main class="py-4">
-            @yield('content')
-        </main>
-    </div>
+@if (Route::has('register'))
+
+             <a href="{{ route('register') }}"><div class="menu_lista"><i id="i_m" class="fas fa-user-plus"></i><h3 id="menu_lista" > Registro </h3></div></a>
+            
+@endif 
+
+             <a href="{{ url('/modificar') }}"><div class="menu_lista"><i id="i_m"class="fas fa-wrench"></i><h3 id="menu_lista" > Modificar usuario </h3></div></a>
+             <a href="{{route('NuevoMensaje.index')}}"><div class="menu_lista"><i id="i_m"class="fas fa-envelope"></i><h3 id="menu_lista" > Nuevo Mensaje </h3></div></a>
+             
+             <!--Logout del menu-->
+             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                 <div class="menu_lista"><i id="i_m"class="fas fa-sign-out-alt"></i><h3 id="menu_lista" > Cerrar sesion</h3></div>
+                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+@csrf
+                     </form>
+             </a> 
+         </div>
+
+@else
+
+        <!--Menu como profesor-->
+         <div class="menu">
+             <a href="{{ route('home') }}"><div class="menu_lista"><i id="i_m"class="fas fa-home"></i><h3 id="menu_lista" > Inicio </h3></div></a>
+             <a href="{{route('NuevoMensaje.index')}}"><div class="menu_lista"><i id="i_m"class="fas fa-envelope"></i><h3 id="menu_lista" > Nuevo Mensaje </h3></div></a>
+             <!--Logout del menu-->
+             <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
+                 <div class="menu_lista"><i id="i_m"class="fas fa-sign-out-alt"></i><h3 id="menu_lista" > Cerrar sesion</h3></div>
+                     <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+@csrf
+                 </form>
+             </a> 
+         </div>
+
+@endif
+
+@endguest
+     </div>
+    
+     <!--Contenedor del resto de las páginas-->
+     <div class="contenedor_central">
+
+     <!--Fecha-->
+     <div class="fecha">{{date('d-m-Y')}}</div>
+
+@yield('content')
+
+     </div>
+
+</div>   
 </body>
 </html>

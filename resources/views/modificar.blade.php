@@ -1,54 +1,48 @@
-@extends('layouts.app')
+    <!----------Modificar usuario lista (Administrador)---------->
+    @extends('layouts.app')
 
-@section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                @foreach($usuarios as $pastel)
-          <table class="table table-dark">
-                        <thead>
-                            <tr>
-                             <th scope="col">#</th>
-                             <th scope="col">Nombre</th>
-                             <th scope="col">Correo</th>
-                             <th scope="col">Rol</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td >{{ $pastel->id }}</td>
-                                <td class="text-center">{{ $pastel->name }}</td>
-                                <td class="text-center">{{ $pastel->email }}</td>
-                                <td class="text-center">{{ $pastel->rol }}</td>
-                                <td class="text-center">
-                                 <form action="{{ route('modificar.destroy', $pastel->id)}}" method="post">
-                  @csrf
-                  @method('DELETE')
-                  <button class="btn btn-info btn-xs" type="submit">Delete</button>
-                </form>
+    @section('content')
 
-            </td>
-            <td>
+    <!--Contenedor principal de lista de usuario-->
+    <div class="mensajes">
 
-                <a href="{{ url('/modificar/'.$pastel->id.'/edit') }}" class="btn btn-info btn-xs">
-                    <span >Modificar</span>
+        <!--Contenedor para la numeración de pagina-->
+        <div class="paginacion">
+                <div class="pagina_numero">Página 1 de 0</div>
+                <a id="b_pagina_atras"><i class="fas fa-angle-left"></i></a>
+                <a id="b_pagina_adelante"><i class="fas fa-angle-right"></i></a>
+        </div>
+
+        <ul>
+
+    @foreach($usuarios as $pastel)
+
+            <li>
+                <!--Estructura de la lista de usuarios-->
+                <a id="mensaje_abrir" href="">
+                    <div id="u_id">{{ $pastel->id }}</div>
+                    <div id="u_nombre">{{ $pastel->name }}</div>
+                    <div id="u_correo">{{ $pastel->email }}</div>
+                    <div id="u_rol">{{ $pastel->rol }}</div>
                 </a>
-            </td>
 
-                                 
-        
-                            </tr>
-                        </tbody>
-                    </table>
-                      
+    @csrf
 
-            
-            
+    <!--Metodo para eliminar usuario-->
+    @method('DELETE')
+    <form id="usuario_eliminar" action="{{ route('modificar.destroy', $pastel->id)}}" method="post">
+    @csrf
+    @method('DELETE')
+    <button id="u_eliminar" ><i id="i_e"class="fas fa-backspace"></i></button>
+    </form>
+
+                <!--Metodo de modificar usuario-->
+                <a id="usuario_modificar" type="submit" href="{{ url('/modificar/'.$pastel->id.'/edit') }}">
+                <div id="u_modificar"><i class="fas fa-wrench"></i></div>
+                </a>
+
+            </li>
 
     @endforeach
-            </div>
-        </div>
-    </div>
-</div>
-@endsection
+
+    @endsection

@@ -36,15 +36,23 @@ class MessagesController extends Controller
      */
     public function store(Request $request)
     {
+        if (request('archivo')) {
+            $adj = $request->file('archivo')->store('public');
+        }else{
+            $adj =null;
+        }
+        
         mensaje::create([
             'asunto' => request('asunto'),
             'mensaje' => request('mensaje'),
+            'adjunto' => $adj,
             'prioridad' => request('prioridad'),
             'leido'=> 0,
             'co' => request('emailO'),
-            'cd' => request('email')
+            'cd' => request('email'),
+            'enviado' => date('Y-m-d
+             H:i:s')
         ]);
-
         return redirect()->route('home');   
     }
 
@@ -57,7 +65,6 @@ class MessagesController extends Controller
     public function show($id)
     {
         $mensaje = mensaje::find($id);
-        //return $mensaje;
         return view('VerMensaje')->with('mensaje', $mensaje);
     }
 
@@ -92,6 +99,6 @@ class MessagesController extends Controller
      */
     public function destroy($id)
     {
-        //
+        
     }
 }

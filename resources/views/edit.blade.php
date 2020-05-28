@@ -1,63 +1,56 @@
-@extends('layouts.app')
+    <!----------Modificar usuario (Administrador)---------->
 
-@section('content')
+    @extends('layouts.app')
 
-    <h4 class="text-center">Editar Usuario: {{ $usuarios->name  }}</h4>
+    @section('content')
 
-     <div class="card-body">
-                     <form action="{{ route('modificar.update',$usuarios->id) }}" method="POST">
+    <!--Contenedores principales-->
+    <div class="contenedor_formu">
 
-       					 @csrf
+        <div class="contenedor_formu2">
 
-        				 @method('PUT')
+            <div class="titulo">{{ $usuarios->name  }}</div>
 
-                         <div class="form-group row">
-                            <label for="name" class="col-md-4 col-form-label text-md-right">{{ __('Name') }}</label>
+            <!--Form para actualizar los datos del usuario con su metodo-->
+            <form action="{{ route('modificar.update',$usuarios->id) }}" method="POST">
 
-                            <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
+    @csrf
+    @method('PUT')
 
-                                @error('name')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                         </div>
+            <!--Actualizar nombre y su validación-->
+            <label for="name" class="label_campo">{{ __('Name') }}</label>
+            <input id="name" type="text" class="form_campo @error('name') is-invalid @enderror" name="name" value="{{ old('name') }}" required autocomplete="name" autofocus>
 
-                        <div class="form-group row">
-                             <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+    @error('name')
+    <span class="invalid-feedback" role="alert">
+    <strong>{{ $message }}</strong>
+    </span>
+    @enderror
+            
+            <!--Actualizar correo y su validación-->
+            <label for="email" class="label_campo">{{ __('E-Mail Address') }}</label>
+            <input id="email" type="email" class="form_campo @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
 
-                             <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email">
+    @error('email')
+    <span class="invalid-feedback" role="alert">
+    <strong>{{ $message }}</strong>
+    </span>
+    @enderror
+        
+            <!--Actualizar Rol-->
+            <label for="rol" class="label_campo">{{ __('Rol') }}</label>
+            <select id="rol"  class="form_campo" name="rol">
+                <option>Jefe </option>
+                <option>Profesor</option>
+            </select>
 
-                                @error('email')
-                                    <span class="invalid-feedback" role="alert">
-                                        <strong>{{ $message }}</strong>
-                                    </span>
-                                @enderror
-                            </div>
-                        </div>
+            <!--Contenedor de botones-->
+            <div class="nm_botones">
+                <button type="submit" id="b_subm">Guardar cambios</button>
+            </div>
 
-                        <div class="form-group row">
-                            <label for="rol" class="col-md-4 col-form-label text-md-right">{{ __('Rol') }}</label>
+        </div>
 
-                            <div class="col-md-6">
-                            
+    </div>
 
-                            
-
-                                <select id="rol"  class="form-control" name="rol">
-
-                                    <option>Jefe </option>
-                                    <option>Profesor</option>
-                    
-                                </select>
-
-                            </div>
-                        </div>
-                         <button type="submit" class="btn btn-success btn-block">Guardar cambios</button>
-                     </form>
-   
-    
-@endsection
+    @endsection

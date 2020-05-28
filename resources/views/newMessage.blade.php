@@ -1,76 +1,55 @@
+<!----------NUEVO MENSAJE---------->
 @extends('layouts.app')
 
 @section('content')
 
-<p>Mensaje nuevo</p>
-<form method="post" action="{{ route('NuevoMensaje.store')}}">
-   @csrf
-  <div class="form-group row">
-    <label for="email" class="col-md-4 col-form-label text-md-right">De:</label>
+<!--Contenedores principales del mensaje-->
+     <div class="contenedor_escribir">
 
-    <div class="col-md-6">
-      <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="emailO" value="{{auth()->user()->email}}" autofocus readonly="readonly">
+         <div class="nuevo_mensaje">
 
-      @error('email')
-      <span class="invalid-feedback" role="alert">
-        <strong>{{ $message }}</strong>
-      </span>
-      @enderror
-    </div>
-  </div>
+             <!--Form a llenar del mensaje a enviar-->
+             <form method="post" action="{{ route('NuevoMensaje.store')}}" enctype="multipart/form-data">
 
-  <div class="form-group row">
-    <div id="destinos" class="col-md-12">
-      <button type="button" onclick="myFunction()">Para:</button>
-      
-    </div>
-  </div>
+                 <div class="titulo">Nuevo mensaje</div>
 
-  <div class="col-md-4 col-form-label text-md-right">
-    <label for="prioridad">Seleccione la prioridad del mesaje</label>
-    <select name="prioridad" id="prioridad">
-      <option>Informativo</option>
-      <option >Normal</option>
-      <option >Urgente</option>
-    </select>
-  </div>
-  <div class="form-group row">
-    <label for="mensaje" class="col-md-4 col-form-label text-md-right">Asunto:</label>
+@csrf
 
-    <div class="col-md-6">
+                 <!--Area superior donde van los datos del mensaje-->
+                 <div class="nm_head">
+                     <input hidden id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="emailO" value="{{auth()->user()->email}}" autofocus readonly="readonly">
 
-      <input id="mensaje" name="asunto" type="text" placeholder="Asunto del mensaje..." >
-    </div>
-  </div>
-  <div class="col-md-4 col-form-label text-md-right">
-    <textarea id="detalle" name="mensaje" rows="10" cols="90" placeholder="Escribe tu mensaje aqui..."></textarea>
-  </div>
+                     <input name="email" class="datos_head" value="{{$mensaje ?? '' ? $mensaje['co'] : '' }}" type="text" placeholder="Para">
 
-  <div class="form-group row">
-   <label for="archivo" class="col-md-4 col-form-label text-md-right">Seleccionar archivo</label>
+                     <input id="mensaje"  name="asunto" type="text" value="{{$mensaje ?? '' ? 'RESPUESTA: '.$mensaje['asunto'] : '' }}" placeholder="Asunto" class="datos_head">
+                 </div>
+                  
+                 <!--Area para seleccionar la prioiridad-->
+                 <select name="prioridad" id="prioridad" class="datos_head">
+                     <option {{ $mensaje ['prioridad']?? '' == 'Importante' ? 'selected' : ''}}>Importante
+                     </option>
+                     <option {{ $mensaje ['prioridad']?? '' == 'Informativo' ? 'selected' : ''}}> 
+                        Informativo
+                     </option>
+                     <option {{ $mensaje ['prioridad']?? '' == 'Solicitud' ? 'selected' : ''}}>Solicitud</option>
+                 </select>
 
-   <div class="col-md-6">
+                 <!--Area de escritura-->
+                 <textarea id="area_mensaje" name="mensaje" placeholder=""></textarea>
 
-    <input id="archivo" type="file" multiple>
-  </div>
+                 <!--Contenedor de los botones del form-->
+                 <div class="nm_botones">
+                     <button id="b_subm">Enviar</button>
+                         <div class="upload-btn-wrapper">
+                             <button id="b_norm">Adjuntar</button>
+                             <input class="upload-file-buton" type="file">
+                         </div>
+                 </div>
 
+             </form>
 
+         </div>
 
- 
-  <button>Enviar</button>
-</form>
-
-
-
-<script>
-function myFunction() {
-  var x = document.createElement("INPUT");
-  x.setAttribute("type", "email");
-  x.setAttribute("name", "email");
-  x.setAttribute("required", "true");
-  x.setAttribute("value", "");
-  document.getElementById('destinos').appendChild(x);
-}
-</script>
+     </div>
 
 @endsection

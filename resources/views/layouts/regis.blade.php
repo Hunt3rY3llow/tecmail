@@ -70,9 +70,11 @@
             </div>
         </nav>
 
-        <main class="py-4">
+        <div class="contenedor_central">
+        <!--Fecha-->
+        <div class="fecha"><h4>22/05/2020</h4></div>
             @yield('content')
-        </main>
+        </div>
     </div>
 </body>
 </html>

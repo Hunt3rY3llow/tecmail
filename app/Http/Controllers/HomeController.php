@@ -28,4 +28,5 @@ class HomeController extends Controller
         $mensajes =  mensaje::where('cd', auth()->user()->email)->orderBy('prioridad','DESC')->get();
         return view('home')->with('mensajes', $mensajes);
     }
+
 }
